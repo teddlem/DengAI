@@ -18,8 +18,8 @@ d_train$id <- paste(d_train$city, d_train$year,d_train$weekofyear)
 d_label$id <- paste(d_label$city, d_label$year,d_label$weekofyear)
 train<-merge(x=d_train, y=d_label, all.x = TRUE)
 
-#Adding month variable, which proved to be slightly LESS predictive than existing "weekofyear" variable, 
-#until I converted it from an number to a factor. 8% vs. 14.5% AdjR2 difference.
+#Adding month variable, which proved to be slightly LESS predictive than existing "weekofyear" 
+#variable, until I converted it from an number to a factor. 8% vs. 14.5% AdjR2 difference.
 train$month<-month(train$week_start_date)
 train$month<-as.factor(train$month)
 str(train)
@@ -88,7 +88,7 @@ strain_ts <- ts(strain$total_cases)
 subtrain <-ts(strain$total_cases[1:800])
 
 #Trying a generic ETS forecast (bleh!)
-subtrain_ets <-forecast(subtrain, h=136) 
+subtrain_ets <-forecast(subtrain, , h=136) 
 subtrain_ets %>% forecast() %>% autoplot () +
   autolayer(strain_ts)
 
